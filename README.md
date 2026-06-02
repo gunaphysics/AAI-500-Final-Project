@@ -133,7 +133,8 @@ Run the notebooks in order:
 
 The detailed EDA in notebook 05 writes its outputs to `reports/`: charts to
 `reports/figures/`, tables to `reports/tables/`, and a written summary at
-[`reports/eda_report.md`](reports/eda_report.md).
+[`reports/eda_report.md`](reports/eda_report.md). The team presentation deck is
+at [`reports/slides.pptx`](reports/slides.pptx).
 
 ## Testing
 
