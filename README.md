@@ -127,8 +127,8 @@ Run the notebooks in order:
 |---|---|---|
 | 01 | `01_eda.ipynb` | Load the raw data, summarize distributions, visualize missingness and target balance. |
 | 02 | `02_cleaning.ipynb` | Drop the identifier, flag clinically impossible values, save the cleaned frame to `data/processed/`. |
-| 03 | `03_statistical_testing.ipynb` | Chi-square tests for categorical predictors; t-tests / Mann–Whitney for numeric predictors against the readmission target. |
-| 04 | `04_modeling.ipynb` | Train baseline, logistic regression, decision tree, random forest, and gradient boosting; compare on accuracy, precision, recall, F1, and ROC-AUC. |
+| 03 | `03_statistical_testing.ipynb` | Chi-square tests for categorical predictors and Welch's t-tests for numeric predictors against the readmission target, with a Bonferroni correction for multiple testing. |
+| 04 | `04_modeling.ipynb` | Fit a logistic-regression GLM (`statsmodels`); report odds ratios with confidence intervals and compare models with likelihood-ratio tests, deviance, and AIC. An optional appendix runs tree/ensemble models for comparison. |
 
 ## Testing
 
@@ -138,15 +138,19 @@ pytest
 
 ## Methodology Notes
 
-- **Preprocessing.** Median-impute + standard-scale numeric features;
-  mode-impute + one-hot-encode categorical features. Wired through a single
-  `ColumnTransformer` so the test split never leaks into training statistics.
-- **Validation.** Stratified hold-out split with the seed defined in
-  `src/config.py`; extend with cross-validation as needed in `04_modeling`.
-- **Baseline.** A majority-class `DummyClassifier`. Models that fail to beat
-  it on ROC-AUC should not be reported as predictive.
-- **Reproducibility.** A single `RANDOM_STATE` is defined in `src/config.py`
-  and propagated to every estimator and split.
+- **Statistical testing.** Chi-square tests of independence for categorical
+  predictors and Welch's t-tests for numeric predictors, with a Bonferroni
+  correction controlling the family-wise error rate across all tests.
+- **Model.** A logistic-regression GLM fit with `statsmodels`. Numeric
+  predictors are standardized so the odds ratios are comparable; categorical
+  predictors enter as indicator variables. Missing labs are handled by
+  complete-case analysis.
+- **Model comparison.** Likelihood-ratio tests and AIC (full vs. null vs. a
+  reduced model), with a majority-class baseline for the accuracy reference.
+- **Out of scope.** Tree/ensemble models and ROC-AUC live in a clearly
+  labeled appendix in `04_modeling`; they are not used for any conclusions.
+- **Reproducibility.** A single `RANDOM_STATE` in `src/config.py` is reused
+  wherever a split is taken.
 
 ## Limitations (working list)
 
