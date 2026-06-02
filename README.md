@@ -31,20 +31,23 @@ determinant data.
 
 ## Dataset
 
-**Source.** Kaggle — *Heart Failure Readmission and Social Determinants of
-Health Dataset*. 3,000 patient records × 16 variables. The raw CSV is **not**
-committed; download it from Kaggle and drop it into `data/raw/`. The default
-filename expected by `src/config.py` is `heart_failure_readmission.csv` —
-update `RAW_FILENAME` there if your file is named differently.
+**Source.** Kaggle — [*Heart Failure Readmission and SDOH Dataset*](https://www.kaggle.com/datasets/nudratabbas/heart-failure-readmission-and-sdoh-dataset)
+(`nudratabbas/heart-failure-readmission-and-sdoh-dataset`). 3,000 patient
+records × 16 variables. The raw CSV is **not** committed. You do **not** need to
+download it by hand — `src.data.load.load_raw()` pulls it from Kaggle via
+`kagglehub` on first use and caches a copy at
+`data/raw/heart_failure_readmission_dataset.csv`. This requires Kaggle API
+credentials (see [Setup](#setup)). The slug and filename live in `src/config.py`
+(`KAGGLE_DATASET`, `RAW_FILENAME`).
 
 **Variable groups**
 
 | Group | Variables |
 |---|---|
 | Identifier (excluded from modeling) | `patient_id` |
-| Clinical | age, BMI, BNP, sodium, creatinine, blood pressure, heart rate |
-| Treatment | ACE inhibitor, beta blocker, diuretic |
-| Social determinants | income level, distance to hospital |
+| Clinical | age, gender, BMI, BNP, sodium, creatinine, systolic BP, heart rate |
+| Treatment | ACE inhibitor, beta blocker, diuretic, adherence score |
+| Social determinants | income level, distance to hospital (km) |
 | Target | `readmitted_30d` (~41% positive class) |
 
 **Known data-quality issues** (from the initial EDA reported in the proposal)
@@ -61,7 +64,7 @@ converts out-of-range readings to `NaN` so downstream imputation can handle them
 ```
 .
 ├── data/
-│   ├── raw/                # untracked — place the Kaggle CSV here
+│   ├── raw/                # untracked — Kaggle CSV auto-downloaded here
 │   ├── interim/            # intermediate artifacts (untracked)
 │   └── processed/          # modeling-ready files (untracked)
 ├── notebooks/
@@ -96,7 +99,17 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 # 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Place the raw Kaggle CSV at data/raw/heart_failure_readmission.csv
+# 4. Configure Kaggle API credentials (one-time)
+#    Kaggle → Account → "Create New API Token" downloads kaggle.json.
+mkdir -p ~/.kaggle && mv ~/Downloads/kaggle.json ~/.kaggle/ && chmod 600 ~/.kaggle/kaggle.json
+#    (Alternatively export KAGGLE_USERNAME and KAGGLE_KEY.)
+```
+
+The dataset is pulled automatically the first time `load_raw()` runs — no manual
+download needed. To fetch it ahead of time:
+
+```bash
+python -c "from src.data.load import load_raw; print(load_raw().shape)"
 ```
 
 The notebooks add the project root to `sys.path`, so `from src.config import ...`

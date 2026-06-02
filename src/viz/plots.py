@@ -1,10 +1,7 @@
-"""Plotting helpers shared across the notebooks."""
 import matplotlib.pyplot as plt
-import pandas as pd
 
 
-def plot_target_distribution(df: pd.DataFrame, target: str, ax=None):
-    """Bar chart of the target class balance."""
+def plot_target_distribution(df, target, ax=None):
     if ax is None:
         _, ax = plt.subplots(figsize=(5, 4))
     df[target].value_counts().sort_index().plot.bar(ax=ax)
@@ -14,8 +11,7 @@ def plot_target_distribution(df: pd.DataFrame, target: str, ax=None):
     return ax
 
 
-def plot_missingness(df: pd.DataFrame, ax=None):
-    """Horizontal bar chart of percentage missing per column (non-zero only)."""
+def plot_missingness(df, ax=None):
     if ax is None:
         _, ax = plt.subplots(figsize=(7, 5))
     pct = df.isna().mean().mul(100).sort_values()

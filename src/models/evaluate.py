@@ -1,4 +1,3 @@
-"""Binary-classification evaluation helpers."""
 import pandas as pd
 from sklearn.metrics import (
     accuracy_score,
@@ -9,11 +8,10 @@ from sklearn.metrics import (
 )
 
 
-def score(model, X, y) -> dict:
-    """Return the standard binary-classification metrics for one model."""
+def score(model, X, y):
     preds = model.predict(X)
-    # ROC-AUC needs scores for the positive class. Baselines without
-    # predict_proba fall back to hard predictions.
+    # ROC-AUC wants positive-class scores; the dummy baseline has no
+    # predict_proba so fall back to its hard predictions.
     if hasattr(model, "predict_proba"):
         probs = model.predict_proba(X)[:, 1]
     else:
@@ -27,7 +25,6 @@ def score(model, X, y) -> dict:
     }
 
 
-def compare(models: dict, X, y) -> pd.DataFrame:
-    """Score a dictionary of fitted models and rank them by ROC-AUC."""
+def compare(models, X, y):
     rows = {name: score(m, X, y) for name, m in models.items()}
     return pd.DataFrame(rows).T.sort_values("roc_auc", ascending=False)

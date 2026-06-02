@@ -1,20 +1,24 @@
-"""Load the raw Kaggle dataset from data/raw/."""
+import shutil
 from pathlib import Path
+
 import pandas as pd
 
-from src.config import RAW_DIR, RAW_FILENAME
+from src.config import KAGGLE_DATASET, RAW_DIR, RAW_FILENAME
 
 
-def load_raw(filename: str = RAW_FILENAME) -> pd.DataFrame:
-    """Read the raw CSV from data/raw/.
+def download_raw():
+    """Grab the dataset off Kaggle and drop a copy in data/raw/."""
+    import kagglehub
 
-    Raises FileNotFoundError with a clear message if the team has not yet
-    placed the Kaggle download in the expected location.
-    """
-    path: Path = RAW_DIR / filename
+    cache = Path(kagglehub.dataset_download(KAGGLE_DATASET))
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    dest = RAW_DIR / RAW_FILENAME
+    shutil.copy2(cache / RAW_FILENAME, dest)
+    return dest
+
+
+def load_raw():
+    path = RAW_DIR / RAW_FILENAME
     if not path.exists():
-        raise FileNotFoundError(
-            f"Raw dataset not found at {path}. Download it from Kaggle and "
-            f"place it there, or update RAW_FILENAME in src/config.py."
-        )
+        path = download_raw()
     return pd.read_csv(path)
