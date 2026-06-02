@@ -1,0 +1,14 @@
+feature,level,count
+gender,Female,1492
+gender,Male,1508
+income_level,High,978
+income_level,Low,1024
+income_level,Medium,998
+ace_inhibitor,0,1435
+ace_inhibitor,1,1565
+beta_blocker,0,1490
+beta_blocker,1,1510
+diuretic,0,1533
+diuretic,1,1467
+readmitted_30d,0,1766
+readmitted_30d,1,1234

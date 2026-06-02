@@ -1,0 +1,16 @@
+variable,type,role
+age,quantitative (continuous),explanatory
+gender,categorical,explanatory
+bmi,quantitative (continuous),explanatory
+bnp,quantitative (continuous),explanatory
+sodium,quantitative (continuous),explanatory
+creatinine,quantitative (continuous),explanatory
+systolic_bp,quantitative (continuous),explanatory
+heart_rate,quantitative (continuous),explanatory
+ace_inhibitor,categorical (binary 0/1),explanatory
+beta_blocker,categorical (binary 0/1),explanatory
+diuretic,categorical (binary 0/1),explanatory
+adherence_score,quantitative (continuous),explanatory
+income_level,categorical,explanatory
+distance_to_hospital_km,quantitative (continuous),explanatory
+readmitted_30d,categorical (binary),response

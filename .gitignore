@@ -39,9 +39,8 @@ data/processed/*
 models/*
 !models/.gitkeep
 
-# Generated reports / figures
-reports/figures/*
-!reports/figures/.gitkeep
+# Reports are a project deliverable, so the figures, tables, and the written
+# EDA report under reports/ are tracked.
 
 # Test / coverage
 .pytest_cache/

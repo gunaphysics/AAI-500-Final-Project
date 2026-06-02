@@ -1,0 +1,15 @@
+feature,p_value,effect_size,effect_type,significant_0_05
+adherence_score,0.0,0.4012,|Cohen's d|,True
+bnp,0.0,0.3321,|Cohen's d|,True
+age,0.0,0.1867,|Cohen's d|,True
+distance_to_hospital_km,0.0002,0.1365,|Cohen's d|,True
+sodium,0.0063,0.1041,|Cohen's d|,True
+creatinine,0.0142,0.0932,|Cohen's d|,True
+ace_inhibitor,0.0,0.0925,Cramer's V,True
+beta_blocker,0.0,0.0848,Cramer's V,True
+systolic_bp,0.0526,0.0713,|Cohen's d|,False
+bmi,0.1424,0.0553,|Cohen's d|,False
+heart_rate,0.5028,0.0249,|Cohen's d|,False
+diuretic,0.4111,0.015,Cramer's V,False
+income_level,0.7982,0.0123,Cramer's V,False
+gender,0.9876,0.0003,Cramer's V,False

@@ -1,0 +1,6 @@
+feature,chi2,dof,p_value,cramers_v
+ace_inhibitor,25.6878,1,0.0,0.0925
+beta_blocker,21.5888,1,0.0,0.0848
+diuretic,0.6756,1,0.4111,0.015
+income_level,0.4509,2,0.7982,0.0123
+gender,0.0002,1,0.9876,0.0003

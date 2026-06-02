@@ -1,0 +1,10 @@
+feature,mean,ci_low,ci_high
+age,65.254,64.724,65.784
+bmi,28.116,27.936,28.295
+bnp,406.308,397.993,414.623
+sodium,138.089,137.943,138.236
+creatinine,1.204,1.186,1.221
+systolic_bp,129.589,128.863,130.314
+heart_rate,79.402,78.857,79.946
+adherence_score,0.699,0.693,0.706
+distance_to_hospital_km,25.4,24.893,25.906

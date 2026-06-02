@@ -129,6 +129,11 @@ Run the notebooks in order:
 | 02 | `02_cleaning.ipynb` | Drop the identifier, flag clinically impossible values, save the cleaned frame to `data/processed/`. |
 | 03 | `03_statistical_testing.ipynb` | Chi-square tests for categorical predictors and Welch's t-tests for numeric predictors against the readmission target, with a Bonferroni correction for multiple testing. |
 | 04 | `04_modeling.ipynb` | Fit a logistic-regression GLM (`statsmodels`); report odds ratios with confidence intervals and compare models with likelihood-ratio tests, deviance, and AIC. An optional appendix runs tree/ensemble models for comparison. |
+| 05 | `05_eda_detailed.ipynb` | In-depth EDA covering Ch 1–5 (descriptive stats, distribution fits, CLT, confidence intervals, bootstrap, Bayesian proportion, correlation, and significance tests with effect sizes). Saves all figures and tables to `reports/`. |
+
+The detailed EDA in notebook 05 writes its outputs to `reports/`: charts to
+`reports/figures/`, tables to `reports/tables/`, and a written summary at
+[`reports/eda_report.md`](reports/eda_report.md).
 
 ## Testing
 
