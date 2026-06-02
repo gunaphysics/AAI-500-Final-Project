@@ -21,6 +21,7 @@ ENV/
 # IDE (track .idea/ for the team's PyCharm config, but ignore VSCode)
 .vscode/
 *.swp
+.idea
 
 # OS
 .DS_Store
